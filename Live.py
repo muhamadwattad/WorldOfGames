@@ -1,6 +1,7 @@
 from GuessGame import play as play_guess_game
 from MemoryGame import play as play_memory_game
 from CurrencyRouletteGame import play as play_currency_roulette
+from Score import add_score
 import Helpers
 
 
@@ -27,13 +28,17 @@ def load_game():
         except Exception as ex:
             print("Incorrect Input")
 
-    #Helpers.clear_console()
+    # Helpers.clear_console()
+    is_user_won = False
     if choice == 1:
         print("Starting Memory Game!")
-        play_memory_game(difficulty)
+        is_user_won = play_memory_game(difficulty)
     elif choice == 2:
         print("Starting Guess Game!")
-        play_guess_game(difficulty)
+        is_user_won = play_guess_game(difficulty)
     else:
         print("Starting Currency Roulette!")
-        play_currency_roulette(difficulty)
+        is_user_won = play_currency_roulette(difficulty)
+
+    if is_user_won:
+        add_score(difficulty)
